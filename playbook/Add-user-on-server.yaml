@@ -1,0 +1,9 @@
+- name: add user on server
+  hosts: serverb
+  tasks:
+    - name: To add user on the server
+      user:
+        name: deepak
+        comment: "System Admin"
+        uid : 89034
+        password: "{{ 'redhat@1234' | password_hash('sha512') }}"

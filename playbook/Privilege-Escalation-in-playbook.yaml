@@ -1,0 +1,11 @@
+- name: Privilege Escalation in playbook
+  hosts: serverb
+  remote_user: student
+  become: yes
+  become_method: sudo
+  become_user: root
+  tasks:
+    - name: Install telnet Package
+      yum:
+        name: telnet
+        state: latest

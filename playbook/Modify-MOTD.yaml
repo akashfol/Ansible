@@ -1,0 +1,8 @@
+---
+- hosts: cm-node
+  user: root
+  tasks:
+    - name: To modify MOTD File
+      copy:
+       dest: /etc/motd
+       content: "MOTD is chaned by Ansible..!!!/n"

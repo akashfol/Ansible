@@ -1,0 +1,33 @@
+- name: Lab-01
+  hosts: remote
+  user: root
+  tasks:
+    - name: To modify MOTD File
+      copy:
+       dest: /etc/motd
+       content: "MOTD is chaned by Ansible..!!!/n"
+
+    - name: To create group
+      group:
+       name: sales
+       state: present
+       gid: 5001
+
+    - name: To add user on the server
+      user:
+        name: sam
+        state: present
+        comment: "System Admin"
+        uid : 3002
+        password: "{{ 'redhat@1234' | password_hash('sha512') }}"
+    - name: To install package
+      yum:
+       name: samba
+       state: present
+
+    - name: To start services
+      service:
+       name: smb
+       state: started
+       enabled: yes
+
