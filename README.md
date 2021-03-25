@@ -24,9 +24,8 @@ Troubleshoot Ansible\
 Automate Linux administration tasks**
 
 ## Audience
-
+<a name="desc"></a>
 **This course is geared toward Linux system administrators, DevOps engineers, infrastructure automation engineers, and systems design engineers who are responsible for these tasks:\**
-
 **Automating configuration management\ 
   Ensuring consistent and repeatable application deployment\
   Provisioning and deployment of development, testing, and production servers\
