@@ -25,8 +25,9 @@ Automate Linux administration tasks**
 
 ## Audience
 
-**This course is geared toward Linux system administrators, DevOps engineers, infrastructure automation engineers, and systems design engineers who are responsible for these tasks:\
-  **Automating configuration management\
+**This course is geared toward Linux system administrators, DevOps engineers, infrastructure automation engineers, and systems design engineers who are responsible for these tasks:\**
+
+**Automating configuration management\ 
   Ensuring consistent and repeatable application deployment\
   Provisioning and deployment of development, testing, and production servers\
   Integrating with DevOps continuous integration/continuous delivery workflows**
