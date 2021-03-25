@@ -14,9 +14,11 @@
 
 **Introduce Ansible\
 Deploy Ansible\
+Using AdHOC commands in Ansible
 Implement playbooks\
 Manage variables and facts\
 Implement task control\
+Error Handlers\
 Deploy files to managed hosts\
 Manage large projects\
 Simplify playbooks with roles\
@@ -24,9 +26,5 @@ Troubleshoot Ansible\
 Automate Linux administration tasks**
 
 ## Audience
-<a name="desc"></a>
-**This course is geared toward Linux system administrators, DevOps engineers, infrastructure automation engineers, and systems design engineers who are responsible for these tasks:\**
-**Automating configuration management\ 
-  Ensuring consistent and repeatable application deployment\
-  Provisioning and deployment of development, testing, and production servers\
-  Integrating with DevOps continuous integration/continuous delivery workflows**
+
+**This course is geared toward Linux system administrators, DevOps engineers, infrastructure automation engineers, and systems design engineers who are responsible for Automating configuration management, Ensuring consistent and repeatable application deployment, Provisioning and deployment of development, testing, and production servers and Integrating with DevOps continuous integration/continuous delivery workflows**
