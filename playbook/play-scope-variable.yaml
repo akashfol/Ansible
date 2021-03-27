@@ -1,0 +1,17 @@
+  - name: Play scope variable
+    hosts: mn-node1
+    vars:
+          message: "Hi Welcome To Ansible Course\n"
+          package1: ftp
+          package2: telnet
+    tasks:
+          - name: To update MOTD file
+            copy: 
+                  dest: /etc/motd
+                  content: "{{ message }}"
+          - name: To install RPMs
+            yum:
+                  name: 
+                        - "{{ package1 }}"
+                        - "{{ package2 }}"
+                  state: absent      

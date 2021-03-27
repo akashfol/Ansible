@@ -1,0 +1,40 @@
+  - name: Lab-03
+    hosts: localhost
+    remote_user: devops
+    become: yes
+    become_method: sudo
+    become_user: root
+    tasks:
+      - name: latest lftp
+        yum:
+          name: lftp
+          state: latest
+  - name: Install ftp server
+    hosts: mn-node1
+    remote_user: devops
+    become: yes
+    become_method: sudo
+    become_user: root
+    tasks:
+      - name: Install vsftpd
+        yum:
+          name: vsftpd
+          state: latest
+      - name: firewalld
+        yum:
+          name: firewalld
+          state: latest
+      - name: Restart vsftpd Service
+        service:
+          name: vsftpd
+          state: started
+      - name: Restart firewalld service
+        service:
+          name: firewalld
+          state: started
+      - name: To add rule in Firewall
+        firewalld:
+          service: ftp
+          permanent: true
+          state: enabled
+          immediate: yes

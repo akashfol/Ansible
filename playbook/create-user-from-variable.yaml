@@ -1,0 +1,11 @@
+- name: create user from variable
+  hosts: all
+  vars:
+    user: joe
+    home: /home/joe
+  tasks:
+  # This line will read: Creates the user joe
+    - name: Creates the user {{ user }}
+      user:
+  # This line will create the user named joe
+        name: "{{ user }}"

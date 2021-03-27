@@ -1,0 +1,33 @@
+---
+- name: To create users
+  hosts: mn-node2
+  vars: 
+    users:
+      bjones:
+        u_name: bjones
+        f_name: Bob
+        l_nmae: Jones
+        h_dir: /home/bjones
+        pass: redhat1
+      acook:
+        u_name: accok
+        f_name: Anne
+        l_name: Cook
+        h_dir: /home/acook
+        pass: redhat2
+  tasks:
+   - name: To create user {{ users.bjones.u_name }}
+     user:
+       name: "{{ users['bjones']['u_name'] }}"
+       comment: "{{ users['bjones']['f_name'] }} {{users['bjones']['l_name'] }}"
+       create_home: yes
+       home: "{{ users['bjones']['h_dir'] }}"
+       password: "{{ users['bjones']['pass'] | password_hash('sha512') }}"
+   - name: To create user "{{ users['acook']['u_name'] }}"
+     user:
+       name: "{{ users['acook']['u_name'] }}"
+       comment: "{{ users['acook']['f_name'] }} {{ users['acook']['l_name'] }}"
+       create_home: yes
+       home: "{{ user['acook']['h_dir' }}"
+       password: "{{ users['acook']['pass'] | password_hash('sha512') }}"
+

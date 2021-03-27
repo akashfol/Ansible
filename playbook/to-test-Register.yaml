@@ -1,0 +1,15 @@
+- name: To test Register
+  hosts:
+  tasks:
+        - name: To satrt service
+          yum:
+                name: openssh-server
+                state: latest
+          register: package_status
+        - debug: var=package_status
+        - name: To Test result
+          user:
+                name: aman
+                state: absent
+          when: package_status | failed      
+

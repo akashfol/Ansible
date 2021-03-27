@@ -1,0 +1,27 @@
+- name: To configure web services
+  hosts: lamp
+  vars:
+    firewall: firewalld
+  tasks:
+    - name: To include variable
+      include_vars: vars/main.yaml
+  - name: To install firewall package
+    yum:
+      name: "{{firewall}}"
+      state: latest
+  - name: To start service
+    service: 
+      name: "{{firewall}}"
+      state: started
+      enabled: true
+  - name: To add port in firewalld
+    firewalld:
+      port: 80/tcp
+      state: enabled
+      immediate: true
+      permanent: true
+  - name: To cretae index File
+    copy:
+      dest: "{{web_root}}/index.html"
+      content: "{{ansible_fqdn}} ({{ansible_default_ipv4.address}})
+

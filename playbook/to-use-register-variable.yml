@@ -1,0 +1,10 @@
+- name: To use register variable
+  hosts: dev
+  tasks:
+    - name: To install packages
+      yum:
+        name: vsftpd
+        state: latest
+      register: pkg_status
+    - debug:
+        var: pkg_status
