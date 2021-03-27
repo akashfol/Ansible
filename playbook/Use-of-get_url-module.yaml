@@ -1,0 +1,11 @@
+- name: Use of get_url module
+  hosts: mn-node2
+  tasks:
+    - name: To download htaccess
+      get_url:
+        url: http://mn-node1/index.html
+        dest: /tmp/index.html
+        owner: root
+        group: root
+        mode: 0644
+

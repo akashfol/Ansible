@@ -1,0 +1,14 @@
+- name: Use of replace module
+  hosts: mn-node1
+  tasks:
+    - name: To configure httpd.conf
+      replace:
+        dest: /etc/httpd/conf/httpd.conf
+        regexp: "Listen 80 "
+        replace: "Listen 8080"
+    - name: To restart service
+      service:
+        name: httpd
+        state: restarted
+        enabled: yes
+

@@ -1,0 +1,15 @@
+- name: Use of lineinfile module
+  hosts: mn-node1
+  tasks:
+    - name: To create index.html
+      lineinfile:
+        dest: /var/www/html/index.html
+        regexp: "^Hello"
+        insertafter: "^Hello"
+        line: "Hello File is updated by Lineinfile Module"
+        state: present
+        create: yes
+        owner: root
+        group: root
+        mode: 0644
+
