@@ -1,9 +1,9 @@
-- name: Create user
-  hosts: devservers
+- name: Lab-06
+  hosts: mn-node2
   remote_user: devops
   become: yes
   vars_files:
-    - vars/secret.yml
+    - vars/secret.yaml
   tasks:
     - name: Create user
       user:
