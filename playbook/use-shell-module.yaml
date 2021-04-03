@@ -1,0 +1,14 @@
+- name: use shell module
+  hosts: mn-node1
+  tasks:
+    - name: To print redhat-release
+      shell:
+        cat/etc/redhat-release
+      register: red_stat
+    - debug: 
+        var: red_stat
+    - name: To install package
+      when: red_stat.stdout == "Red Hat Enterprise Linux Server release 7.2 (Maipo)"
+      yum:
+        name: tree
+        state: latest

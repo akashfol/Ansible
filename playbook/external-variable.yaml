@@ -1,20 +1,8 @@
 ---
-- name: To create users
+- name: External Variable
   hosts: mn-node2
-  vars: 
-    users:
-      bjones:
-        u_name: bjones
-        f_name: Bob
-        l_name: Jones
-        h_dir: /home/bjones
-        pass: redhat1
-      acook:
-        u_name: accok
-        f_name: Anne
-        l_name: Cook
-        h_dir: /home/acook
-        pass: redhat2
+  vars_files:
+    - user-var.yaml
   tasks:
    - name: To create user {{ users.bjones.u_name }}
      user:

@@ -1,0 +1,41 @@
+- name: Lab-04
+  hosts: mn-node2
+  vars: 
+    web_pkg: httpd
+    firewall_pkg: firewalld
+    web_service: httpd
+    firewall_service: firewalld
+    rule: http
+  tasks:
+    - name: To install packages
+      yum:
+        name: 
+          - "{{web_pkg}}"
+          - "{{firewall_pkg}}"
+        state: latest
+    - name: To start {{web_service}} service
+      service:
+        name: "{{web_service}}"
+        state: started
+        enabled: yes
+    - name: To start {{firewall_service}}
+      service:
+        name: "{{firewall_service}}"
+        state: started
+        enabled: yes
+
+    - name: To add rule in Firewall
+      firewalld:
+        service: "{{rule}}"
+        permanent: true
+        immediate: true
+        state: enabled
+- name: To verify apache service
+  hosts: localhost
+  tasks: 
+    - name: To verify webserver is working
+      uri:
+        url: http://mn-node2
+        status_code: 200
+
+

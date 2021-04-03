@@ -1,10 +1,15 @@
 - name: To use register variable
-  hosts: mn-node1
-  tasks:
+  hosts: dev
+  tasks: 
     - name: To install packages
-      yum:
+      yum: 
         name: vsftpd
         state: latest
       register: pkg_status
     - debug:
         var: pkg_status
+    - name: To create user
+      user:
+        name: user1
+        state: absent
+      when: pkg_status.changed == false

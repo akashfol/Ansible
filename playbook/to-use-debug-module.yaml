@@ -1,10 +1,9 @@
-- name: To use register variable
+- name: To use debug module
   hosts: mn-node1
   tasks:
     - name: To install packages
       yum:
         name: vsftpd
         state: latest
-      register: pkg_status
     - debug:
-        var: pkg_status
+        msg: "Hi welcome to install package"

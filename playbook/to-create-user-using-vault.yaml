@@ -1,0 +1,9 @@
+- name: To create user using vault
+  hosts: mn-node2
+  vars_files:
+    - secret.yaml
+  tasks:
+    - name: create test {{ user1 }}
+      user:
+        name: "{{ user1 }}"
+        password: "{{ password1 | password_hash('sha512') }}"

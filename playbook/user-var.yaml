@@ -1,0 +1,13 @@
+    users:
+      bjones:
+        u_name: bjones
+        f_name: Bob
+        l_name: Jones
+        h_dir: /home/bjones
+        pass: redhat1
+      acook:
+        u_name: accok
+        f_name: Anne
+        l_name: Cook
+        h_dir: /home/acook
+        pass: redhat2

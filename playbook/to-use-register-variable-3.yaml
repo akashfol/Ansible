@@ -1,0 +1,15 @@
+- name: To use register variable
+  hosts:
+  tasks:
+    - name: To install packages
+      yum:
+        name: vsftpd
+        state: latest
+      register: pkg_stat
+    - debug: var=pkg_stat
+    - debug:
+        msg: "Package is installed"
+      when: pkg_stat.changed == true
+    - debug:
+        msg: "Package is already installed"
+      when: pkg_stat.changed == false

@@ -1,0 +1,11 @@
+- name: register example
+  hosts: all
+  sudo: yes
+  tasks:
+    - name: start service
+      service: name=httpd state=started
+      ignore_errors: True
+      register: service_result
+    - name: shutdown
+      command: "shutdown-h+1m"
+      when: service_result | failed
