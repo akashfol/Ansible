@@ -1,0 +1,39 @@
+- name: To use loop
+  hosts: mn-node1
+  tasks
+   - name: First way to use loop 
+     yum:
+       names: "{{item}}"
+       state: latest
+     ignore_errors: yes
+     with_items:
+      - postfix
+      - dovecot
+   - name: Second way of loop using variable
+     vars:
+      file_server:
+        - vsftpd
+        - samba
+     yum:
+      name: "{{item}}"
+      state: latest
+     with_items: "{{file_server}}"
+   - name: Third way of loop using array
+     copy:
+       src: "{{item.src}}"
+       dest: "{{item.dest}}"
+       owner: "{{item.own}}"
+     with items:
+       - { src: 'file1', dest: '/var/tmp', own: 'root' }
+       - { src: 'file2', dest: '/var/', own: 'root' }
+       - { src: 'file3', dest: '/opt/', own: 'root' }
+   - name: To start services
+     service:
+       name: "{{item}}"
+       state: started
+       enabled: true
+     with_items:
+       - postfix
+       - dovecot
+
+

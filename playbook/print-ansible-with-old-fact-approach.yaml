@@ -1,0 +1,7 @@
+- name: print ansible with old fact approach
+  hosts: mn-node1
+  tasks:
+    - name: Print ansible facts
+      debug:
+        msg: IP address {{ ansible_facts.default_ipv4 }}
+

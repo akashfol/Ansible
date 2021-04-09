@@ -1,0 +1,13 @@
+- name: To use custom facts
+  hosts: all
+  tasks:
+    - name: To install package
+      yum:
+        name:
+          - "{{ ansible_local.remotefact.packages.db_package }}"
+          - "{{ ansible_local.remotefact.packages.web_package }}"
+        state: latest
+      register: result
+    - name: Print Output
+      debug:
+        var: result

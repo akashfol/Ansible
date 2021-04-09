@@ -1,0 +1,15 @@
+- name: To configure Samba server
+  hosts: mn-node2
+  tasks:
+    - name: To install package
+      yum:
+        name: samba
+        state: absent
+      tags: package
+    - name: To copy configuration file
+      copy:
+        src: smb.conf
+        dest: /etc/samba/smb.conf
+        owner: root
+        group: root
+        mode: 644

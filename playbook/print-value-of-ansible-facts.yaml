@@ -1,0 +1,7 @@
+- name: Print value of ansible facts
+  hosts: mn-node1
+  tasks:
+    - name: Print ansible facts
+      debug:
+        msg: Today's {{ ansible_facts['date_time']['date'] }}
+

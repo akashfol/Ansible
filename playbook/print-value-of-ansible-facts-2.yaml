@@ -1,0 +1,12 @@
+- name: Print value of ansible facts 2
+  hosts: mn-node1
+  tasks:
+    - name: Print ansible facts
+      debug:
+        msg:
+          - IP address {{ ansible_facts['default_ipv4']['address'] }}
+          - subnet mask is {{ ansible_facts['default_ipv4']['netmask'] }}
+          - Mac Address is {{ ansible_facts['default_ipv4']['macaddress'] }}
+          - Hostname is {{ ansible_facts['hostname'] }}
+          - Partitions on system are {{ ansible_facts['devices']['nvme0n1']['partitions']['nvme0n1p1']['size'] }}
+

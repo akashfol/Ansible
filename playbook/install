@@ -1,0 +1,3 @@
+- name: install mariadb-server if enough space on root
+  yum:
+

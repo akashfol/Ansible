@@ -1,0 +1,8 @@
+- name: For nested Loop
+  hosts: mn-node2
+  tasks:
+    - debug:
+        msg: "{{ item }}"
+      with_file:
+        - messfile
+

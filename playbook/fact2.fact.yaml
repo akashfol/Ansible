@@ -1,0 +1,11 @@
+[student@workstation myplaybook2]$ cat /etc/ansible/facts.d/fact3.fact
+{
+"packages": {
+"web_package": "httpd",
+"db_package": "mariadb-server"
+},
+"users": {
+"user1": "joe"
+"user2":"jane"
+}
+}

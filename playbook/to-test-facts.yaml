@@ -1,0 +1,12 @@
+- name: To test facts
+  hosts: localhost
+  tasks:
+        - name: print facts
+          debug:
+            msg: >
+                      Server name of manage hosts is {{ansible_all_ipv4_addresses}}
+                      Custom facts are {{ ansible_local.fact1.package.web_package }}
+        - name: Install custom packages
+          yum:
+                name: "{{ ansible_local.fact1.package.web_package }}"
+                state: absent
