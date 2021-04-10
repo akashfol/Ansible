@@ -3,9 +3,8 @@
   tasks
    - name: First way to use loop 
      yum:
-       names: "{{item}}"
+       names: "{{ item }}"
        state: latest
-     ignore_errors: yes
      with_items:
       - postfix
       - dovecot

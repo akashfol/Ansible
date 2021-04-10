@@ -1,0 +1,12 @@
+
+- name: deprecated way of use loop2
+  hosts: mn-node1
+  tasks:
+   - name: Adding users in group
+     user:
+      name: "{{ item.name }}"
+      state: present
+      groups: "{{ item.groups }}"
+     with_items:
+       - { name: 'jane', groups: 'wheel' }
+       - { name: 'joe', groups: 'root' }

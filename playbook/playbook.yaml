@@ -1,0 +1,5 @@
+- name: Include task
+  hosts: mn-node1
+  tasks:
+    - name: ass user in group
+      include_tasks: adding-user-in-group.yaml 

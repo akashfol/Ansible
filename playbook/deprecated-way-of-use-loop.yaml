@@ -1,0 +1,12 @@
+# cat deprecated-way-of-use-loop.yaml
+
+- name: deprecated way of use loop
+  hosts: mn-node1
+  tasks:
+   - name: Postfix and Dovecot are running
+     service:
+       name: "{{ item }}"
+       state: started
+     with_items:
+      - postfix
+      - dovecot
