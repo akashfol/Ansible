@@ -1,0 +1,21 @@
+firewall_req: firewalld
+
+web_req: httpd
+
+ssl_pkg: mod_ssl
+
+conf_src: files/httpd.conf
+
+conf_dest: /etc/httpd/conf/httpd.conf
+
+htaccess_src: files/.htaccess
+
+htpasswd_dir: /etc/httpd/secrets
+
+htpasswd_src: files/.htpasswd
+
+htpasswd_dest: "{{ htpasswd_dir }}/.htpasswd"
+
+secret_root: /var/www/html/secrets
+
+htaccess_dest: "{{ secret_root }}/.htaccess"

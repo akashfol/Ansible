@@ -1,0 +1,99 @@
+- name: install and configure webserver with basic auth
+  hosts: mn-node2
+  vars_files:
+    - files/variable.yaml 
+  tasks:
+    - name: latest version of necessary packages installed
+      yum:
+        name:
+          - "{{ firewall_req }}"
+          - "{{ web_req }}"
+          - "{{ ssl_pkg }}"
+        state: latest
+
+    - name: configure web service
+      copy:
+        src: "{{ conf_src }}"
+        dest: "{{ conf_dest }}"
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: Create htpasswd directory
+      file: 
+        path: "{{ htpasswd_dir }}"
+        state: directory
+        owner: apache
+        group: apache
+        mode: 0500
+      
+    - name: Create htpasswd file
+      copy:
+        src: "{{ htpasswd_src }}"
+        dest: "{{ htpasswd_dest }}"
+        owner: apache
+        group: apache
+        mode: 0400
+
+    - name: Create secrets root directory
+      file: 
+        path: "{{ secret_root }}"
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
+
+    - name: .htaccess file installed in docroot
+      copy:
+        src: "{{ htaccess_src }}"
+        dest: "{{ htaccess_dest }}"
+        owner: apache
+        group: apache
+        mode: 0400
+
+    - name: create index.html
+      copy:
+        content: "{{ ansible_facts['fqdn'] }}
+ ({{ ansible_facts['default_ipv4']['address'] }}) has been customized by Ansible./n"
+        dest: "{{ secret_root }}/index.html"
+
+    - name: firewall service enable and started
+      service:
+        name: "{{ firewall_req }}"
+        state: started
+        enabled: true
+
+    - name: open the port for the web server
+      firewalld:
+        service: http
+        state: enabled
+        immediate: true
+        permanent: true
+
+    - name: web service enabled and started
+      service:
+        name: "{{ web_req }}"
+        state: restarted
+        enabled: true
+
+- name: test web server with basic auth
+  hosts: localhost
+  become: no
+  vars:
+    - web_user: ansible
+  vars_files:
+    - files/secrets.yaml
+  tasks:
+    - name: connect to web web server with basic auth
+      uri:
+        url: http://mn-node2
+        validate_certs: no
+        force_basic_auth: yes
+        user: "{{ web_user }}"
+        password: "{{ web_pass }}"
+        return_content: yes
+        status_code: 200
+      register: auth_test
+
+    - debug:
+        var: auth_test.content

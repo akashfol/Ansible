@@ -1,0 +1,7 @@
+AuthUserFile /etc/httpd/secrets/.htpasswd
+
+AuthName "Please Enter Password"
+
+AuthType Basic
+
+Require valid-user
