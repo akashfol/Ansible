@@ -1,3 +1,9 @@
+# Install git on controller and clone below below URL – This location has all the required files
+# git clone https://github.com/linux2cloud/Ansible.git
+# cd Ansible/
+# git checkout lab-08
+
+
 - name: install and configure webserver with basic auth
   hosts: webserver
   tasks:
