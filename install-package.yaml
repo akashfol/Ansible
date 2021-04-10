@@ -1,0 +1,26 @@
+---
+- name: Playbook to install package
+  hosts: remote2
+  vars:
+    pkg: ftp
+    srv: httpd
+  tasks:
+    - name: Install {{ pkg }}
+      package:
+        name: "{{ pkg }}"
+        state: latest
+      register: pkg_status
+
+    - name: Install {{ srv }}
+      service:
+        name: "{{ srv }}"
+        state: started
+      register: srv_status
+    
+    - name: Debug service task
+      debug:
+        var: srv_status
+    
+    - name: Debig pkg task
+      debug:
+        var: pkg_status

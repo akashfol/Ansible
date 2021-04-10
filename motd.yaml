@@ -1,0 +1,8 @@
+---
+- name : MOTD message update on workers
+  hosts : mn-node1
+  tasks :
+    - name : update MOTD with Copy module
+      copy:
+        content: Welcome to Ansible Session!!!
+        dest: /etc/motd

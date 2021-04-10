@@ -1,0 +1,13 @@
+- name: Append/create index.html
+  hosts: mn-node2
+  tasks:
+    - name: Append/create index.html
+      lineinfile:
+        path: /var/www/html/index.html
+        #regexp: '^testfile'
+        insertafter: '^Welcome'
+        line: 'modified by lineinfile '
+        state: present
+        create: yes
+        owner: root
+        group: root

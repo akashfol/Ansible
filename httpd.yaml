@@ -1,0 +1,48 @@
+- name: To configure apache server
+  hosts: mn-node2
+  vars_files:
+    - vars/httpd.yaml
+  tasks:
+    - name: Install packages
+      package:
+        name:
+          - httpd
+          - firewalld
+        state: latest
+
+    - name: Start "{{ srv1 }}" service
+      service:
+        name: "{{ srv1 }}"
+        state: started
+        enabled: true
+    
+    - name: Start {{ srv2 }} service
+      service:
+        name: "{{ srv2 }}"
+        state: started
+        enabled: true
+
+    - name: Add port in firewalld
+      firewalld:
+        service: http
+        permanent: true
+        state: enabled
+        immediate: yes
+
+    - name: Create index file 
+      copy:
+        content: "Welcome to Ansible apache server\n"
+        dest: "{{ docuemnt_root }}/index.html"
+    
+    - name: Create test directory
+      file:
+        path: /var/www/html/test
+        state: directory
+        owner: apache
+        group: apache
+
+    - name: Create  file in test directory
+      copy:
+        content: "Welcome to Ansible apache server\n"
+        dest: /var/www/html/test/documents
+

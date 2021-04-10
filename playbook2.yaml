@@ -1,0 +1,15 @@
+- name: Creating playbook after adding indentaion code in source file
+  hosts: mn-node1
+  tasks:
+    - name: To install telnet package
+      yum:
+        name: telnet
+        state: latest
+
+- name: Create another play
+  hosts: mn-node2
+  tasks:
+    - name: create user
+      user:
+        name: testuser
+        state: present

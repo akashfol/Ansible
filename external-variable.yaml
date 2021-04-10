@@ -1,0 +1,15 @@
+---
+- name: Playbook to install package
+  hosts: remote2
+  vars_files:
+    - vars/variable.yaml
+  tasks:
+    - name: Install {{ pkg }}
+      package:
+        name: "{{ pkg }}"
+        state: latest
+
+    - name: Start service {{ srv }}
+      service:
+        name: "{{ srv }}"
+        state: started

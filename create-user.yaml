@@ -1,0 +1,8 @@
+---
+- name: create user
+  hosts: myserver
+  tasks:
+    - name: Create user {{ users }}
+      user:
+        name: "{{ users }}"
+        state: present

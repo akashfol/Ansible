@@ -1,0 +1,15 @@
+---
+- name: Download file
+  hosts: mn-node1
+  tasks:
+    - name: Check site
+      uri:
+        url: http://172.24.0.62:8080
+        return_content: yes
+        status_code: 200
+      tags: check
+    - name: Download documents
+      get_url:
+        url: http://172.24.0.62:8080/test/documents
+        dest: /tmp/document
+        mode: 0600

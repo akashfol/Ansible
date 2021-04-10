@@ -1,0 +1,5 @@
+- name: start service
+  hosts: mn-node1
+  tasks:
+    - name: start httpd service
+      service: name=httpd state=started enabled=true

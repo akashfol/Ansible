@@ -1,0 +1,21 @@
+- name: Replace port number
+  hosts: mn-node2
+  tasks:
+    - name: Change port numner
+      replace: 
+        dest: /etc/httpd/conf/httpd.conf
+        regexp: "Listen 80"
+        replace: "Listen 8080"
+
+    - name: Restart service
+      service:
+        name: httpd
+        state: restarted
+
+    - name: Add port in firewalld
+      firewalld:
+        port: 8080/tcp
+        permanent: true
+        state: enabled
+        immediate: yes
+

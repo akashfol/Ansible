@@ -1,0 +1,10 @@
+---
+- name: Playbook to install package
+  hosts: remote2
+  vars_files:
+    - vars/variable.yaml
+  tasks:
+    - name: Print values of variable
+      debug:
+#        var: "{{ srv }}"
+        msg: "Hello Welcome to ansible {{ srv }}"

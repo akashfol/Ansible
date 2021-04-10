@@ -1,0 +1,3 @@
+document_root: /var/www/html
+srv1: httpd
+srv2: firewalld

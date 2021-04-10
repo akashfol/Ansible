@@ -1,0 +1,18 @@
+- name: For install package start service
+  hosts: mn-node1
+  remote_user: devops
+  become: yes
+  become_method: sudo
+  become_user: root
+  tasks:
+          - name: Install vsftpd package
+            yum:
+                    name: vsftpd
+                    state: latest
+            tags: install
+          - name: Start service
+            service:
+                    name: vsftpd
+                    state: started
+                    enabled: true
+            tags: service
