@@ -1,0 +1,66 @@
+- name: virtual site with jinja template
+  hosts: mn-node2
+  vars:
+    firewall_req: firewalld
+    web_req: httpd
+    conf_src: virtual-site.j2
+    conf_dest: /etc/httpd/conf.d/
+  tasks:
+    - name: latest version of necessary packages installed
+      yum:
+        name:
+          - "{{ firewall_req }}"
+          - "{{ web_req }}"
+        state: latest
+
+    - name: configure web service for virtual hosting
+      template:
+        src: "{{ conf_src }}"
+        dest: "{{ conf_dest }}/virtual-site.conf"
+        owner: root
+        group: root
+        mode: 0644
+      notify:
+        - restart httpd
+
+    - name: Create directory for virtaul host
+      file: 
+        path: "/var/www/{{ ansible_facts['hostname'] }}"
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
+    
+    - name: create index.html
+      copy:
+        content: "{{ ansible_facts['fqdn'] }}
+ ({{ ansible_facts['default_ipv4']['address'] }}) It is virtaul site created by Ansible./n"
+        dest: "/var/www/{{ ansible_facts['hostname'] }}/index.html"
+
+    - name:  Enable and started service
+      service:
+        name: "{{ item }}"
+        state: started
+        enabled: true
+      loop:
+        - "{{ firewall_req }}"
+        - "{{ web_req }}"
+
+    - name: open the port for the web server
+      firewalld:
+        service: http
+        state: enabled
+        immediate: true
+        permanent: true
+
+    - name: Print information
+      debug: 
+        msg:
+          - Orignal website is available on http://{{ ansible_facts['hostname'] }}
+          - Virtual website is availbel at http://virtual
+          - Add entry in /etc/hosts file if it is not resolve by dns - {{ ansible_facts['default_ipv4']['address'] }} virtual
+  handlers:
+    - name: restart httpd
+      service:
+        name: httpd
+        state: restarted

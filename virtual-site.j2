@@ -1,0 +1,8 @@
+<VirtualHost *:80>
+    ServerAdmin admin@{{ ansible_facts['hostname'] }}
+    DocumentRoot /var/www/{{ ansible_facts['hostname'] }}
+    ServerName virtual.example.com
+    ErrorLog "/var/log/httpd/{{ ansible_facts['hostname'] }}-error_log"
+    CustomLog "/var/log/httpd/{{ ansible_facts['hostname'] }}-access_log" common
+</VirtualHost>
+
