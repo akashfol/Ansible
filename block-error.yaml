@@ -1,0 +1,20 @@
+- name: To configure apache server
+  hosts: mn-node2
+  tasks:
+    - block:
+        - name: Install postfix
+          yum:
+            name: postifxx
+            state: latest
+
+      rescue:
+        - name: Install sendmail
+          yum:
+            name: sendmail
+            state: latest
+
+      always:
+        - name: Install dovecot
+          yum:
+            name: dovecot
+            state: latest

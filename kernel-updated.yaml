@@ -1,0 +1,13 @@
+---
+- name: Use loop
+  hosts: mn-node1
+  tasks:
+    - name: Install package
+      debug:
+        msg: "Kernel is update"
+      when: (ansible_kernel == "4.18.0-193.el8.x86_64" and ansible_distribution_version == "8.2")
+    
+    - name: Check kernel
+      fail:
+        msg: "Need to update the kernel"
+      when: (ansible_kernel == "4.18.0-192.el8.x86_64" and ansible_distribution_version == "8.3")

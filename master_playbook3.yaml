@@ -1,0 +1,5 @@
+- name: Import playbook and define variable
+  import_playbook: install-package.yaml
+  vars:
+    pkg: samba
+    srv: smb

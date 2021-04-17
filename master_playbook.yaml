@@ -1,0 +1,14 @@
+- name: Test playbook
+  hosts: mn-node1
+  tasks:
+
+    - name: Print value
+      debug:
+        msg:
+          - Usages of include and import
+
+    - name: Include task1
+      include_tasks: include_task1.yaml
+
+    - name: Include task2
+      import_tasks: import_task2.yaml

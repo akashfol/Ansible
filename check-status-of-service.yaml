@@ -1,0 +1,19 @@
+---
+- name: Use loop
+  hosts: mn-node1
+  tasks:
+    - name: Check status of service
+      service:
+        name: httpd
+        state: restarted
+      register: srv_stat
+
+    - debug: var=srv_stat
+#    - debug:
+#        msg: "Servie is runing"
+#      when: srv_stat.status.ActiveState == "active"
+
+#    - fail:
+#        msg: "Service is not running"
+#      when: srv_stat.status.ActiveState == "inactive"
+      

@@ -1,0 +1,19 @@
+---
+- name: Use loop
+  hosts: mn-node1
+  tasks:
+    - name: Check status of service
+      service:
+        name: httpd
+        state: restarted
+      register: srv_stat
+
+#    - debug: var=srv_stat
+    - debug:
+        msg: "Servie is restarted"
+      when: srv_stat.changed == true
+
+    - fail:
+        msg: "Service is not restarted"
+      when: srv_stat.changed == false
+      

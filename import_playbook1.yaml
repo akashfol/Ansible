@@ -5,13 +5,4 @@
       yum:
         name: telnet
         state: latest
-      tags: install package
 
-- name: Create another play
-  hosts: mn-node2
-  tasks:
-    - name: create user
-      user:
-        name: testuser
-        state: present
-      tags: create user

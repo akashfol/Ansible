@@ -1,0 +1,42 @@
+---
+- name: Use loop
+  hosts: mn-node1
+  tasks:
+    - name: Create groups
+      group:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - sales
+        - mkt
+        - admin
+
+    - name: Create users
+      user:
+        name: "{{ item.name }}"
+        groups: "{{ item.groups }}"
+        uid: "{{ item.uid }}"
+        comment: "{{ item.comment }}"
+        state: present
+      loop:
+        - name: user1
+          groups: sales
+          uid: 2003
+          comment: "System Admin"
+        - name: user2
+          groups: mkt
+          uid: 2004
+          comment: "DBA"
+        - name: user3
+          groups: admin
+          uid: 2005
+          comment: "developer"
+
+    - name: add entry in ntp.conf
+      copy:
+        content: "{{ item }}"
+        dest: /etc/ntp.conf
+      loop:
+        - "server1"
+        - "server2"
+

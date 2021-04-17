@@ -1,0 +1,49 @@
+- name: To configure apache server
+  hosts: mn-node2
+  force_handlers: yes
+  ignore_errors: yes
+  vars_files:
+    - vars/httpd.yaml
+  tasks:
+    - name: Install packages
+      package:
+        name:
+          - httpd
+          - firewalld
+        state: latest
+
+    - name: Configure httpd
+      copy:
+        src: httpd.conf
+        dest: /etc/httpd/conf/httpd.conf
+        owner: root
+        group: root
+        mode: 0644
+      notify:
+        - restart httpd
+
+    - name: Start httpd service
+      service:
+        name: httpd
+        state: started
+        enabled: true
+    
+    - name: Create index file 
+      copy:
+        content: "Welcome to Ansible apache server\n"
+        dest: var/www/html/index.html
+      ignore_errors: yes
+
+    - name: Create test directory
+      file:
+        path: /var/www/html/test
+        state: directory
+        owner: apache
+        group: apache
+
+  handlers:
+    - name: restart httpd
+      service:
+        name: httpd
+        state: restarted
+        enabled: true

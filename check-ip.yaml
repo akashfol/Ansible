@@ -1,0 +1,15 @@
+---
+- name: Gather IP from facts
+  hosts: cn-node
+  #gather_facts: no
+  tasks:
+    - name: IP address
+      debug:
+        msg:
+          - IP address is {{ ansible_facts['default_ipv4']['address'] }}
+          - MAC address is {{ ansible_facts['default_ipv4']['macaddress'] }}
+          - Interface of address is {{ ansible_facts['default_ipv4']['interface'] }}
+          - Arch {{ ansible_facts['architecture'] }}
+          - Distribution {{ ansible_facts['distribution'] }}
+          - Env of server {{ ansible_facts['ansible_local']['fact1']['env']['tier'] }}
+          #- Env of server {{ ansible_facts['ansible_memfree_mb'] }}

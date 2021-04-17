@@ -1,0 +1,13 @@
+---
+- name: User create
+  hosts: mn-node1
+  vars:
+    myuser: user1
+  vars_files:
+    - pass.yaml
+  tasks:
+    - name: Create user {{ myuser }}
+      user:
+        name: "{{ myuser }}"
+        password: "{{ mypass | password_hash('sha512') }}"
+      

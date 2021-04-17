@@ -1,0 +1,6 @@
+- name: To install {{ pkg1 }} package
+  yum:
+    name: "{{ pkg1 }}"
+    state: latest
+  tags: included_tasks
+

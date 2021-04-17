@@ -1,0 +1,9 @@
+---
+- name: Use serial
+  hosts: remote
+  serial: 1
+  tasks:
+    - name: Install mariadb-server
+      package:
+        name: mariadb-server
+        state: latest

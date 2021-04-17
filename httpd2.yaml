@@ -1,0 +1,28 @@
+- name: To configure apache server
+  hosts: mn-node2
+  vars:
+    task_stat: False
+    task_stat2: True
+  vars_files:
+    - vars/httpd.yaml
+  tasks:
+    - name: Install packages
+      package:
+        name:
+          - httpd
+          - firewalld
+        state: latest
+      when: task_stat2
+
+    - name: Start "{{ srv1 }}" service
+      service:
+        name: "{{ srv1 }}"
+        state: started
+        enabled: true
+    
+    - name: Start {{ srv2 }} service
+      service:
+        name: "{{ srv2 }}"
+        state: started
+        enabled: true
+

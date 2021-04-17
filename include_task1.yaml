@@ -1,0 +1,6 @@
+- name: To install telnet package
+ yum:
+    name: telnet
+    state: latest
+ tags: included_tasks
+

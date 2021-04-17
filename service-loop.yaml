@@ -1,0 +1,24 @@
+---
+- name: Use loop
+  hosts: mn-node1
+  vars:
+    srv_list:
+      - postfix
+      - dovecot
+  tasks:
+    - name: Install package
+      package:
+        name:
+          - postfix
+          - dovecot
+        state: latest
+
+    - name: Start service
+      service:
+        name: "{{ item }}"
+        state: started
+      loop: "{{ srv_list }}"
+#      loop:
+#        - postfix
+#        - dovecot
+      

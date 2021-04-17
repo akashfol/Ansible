@@ -1,0 +1,15 @@
+- name: playbook with multiple play
+   hosts: mn-node1
+   tasks:
+     - name: Install telnet Package
+       yum:
+         name: telnet
+         state: latest
+ - name: Install Package
+   hosts: mn-node2
+   tasks:
+     - name: Install httpd package
+       yum:
+         name: telenet
+         state: latest
+

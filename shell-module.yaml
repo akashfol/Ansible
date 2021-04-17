@@ -1,0 +1,15 @@
+---
+- name: Use loop
+  hosts: mn-node1
+  tasks:
+    - name: Check status of service
+      shell:
+        cat /etc/redhat-release
+      register: red_stat
+
+    - debug: var=red_stat
+
+    - name: Create user
+      user:
+        name: test
+      when: red_stat.stdout == "Red Hat Enterprise Linux release 8.2 (Ootpa)"

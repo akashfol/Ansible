@@ -1,0 +1,5 @@
+- name: Import Playbook1
+  import_playbook: import_playbook2.yaml
+
+- name: Import playbook1
+  import_playbook: import_playbook1.yaml

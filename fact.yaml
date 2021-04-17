@@ -1,0 +1,7 @@
+---
+- name: Gather facts
+  hosts: localhost
+  tasks:
+    - name: Garther facts
+      debug:
+        var: ansible_facts
